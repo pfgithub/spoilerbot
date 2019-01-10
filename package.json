@@ -5,6 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "discord.js": "^11.4.2",
-    "pastebin-js": "^0.6.0"
+    "pastebin-js": "^0.6.0",
+    "request": "^2.88.0"
   }
 }

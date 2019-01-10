@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const RichEmbed = Discord.RichEmbed;
 const PastebinAPI = require("pastebin-js");
+const request = require("request");
 
 const secret = require("./secret");
 
@@ -9,7 +10,7 @@ const client = new Discord.Client();
 
 
 client.on("ready", () => {
-	console.log("Started as "+client.user.tag);
+	console.log("Started as "+client.user.tag); //eslint-ignore-line no-console
 });
 
 function replaceAsync(str, re, callback) { // https://stackoverflow.com/questions/33631041/javascript-async-await-in-replace
@@ -49,13 +50,30 @@ function clean(str){
 	return str;
 }
 
-async function createTextURLFor(str){
-	try{
-		return `${(await pastebin.createPaste({text: str, title: "Spoiler", privacy: 1}))}`;
-	}catch(er){
-		console.log(er);
-		return `https://dummyimage.com/600x400/ffffff/000000&text=${encodeURIComponent(str.split`\n`.join` - `)}`;
-	}
+function createTextURLFor(str){
+	return new Promise((resolve, reject) => {
+		let longURL = `https://pfgithub.github.io/spoilerbot/spoiler?s=${encodeURIComponent(str)}`;
+		request.post(`https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=${secret.firebasekey}`,
+			{json: {
+				dynamicLinkInfo: {
+					domainUriPrefix: "spoilerbot.page.link",
+					link: longURL
+				},
+				suffix: {
+					option: "SHORT"
+				}
+			}},
+		(err, httpResponse, body) => {
+			if(err || body.error) {
+				console.log(err, body);
+				return resolve(longURL);
+			}
+			if(httpResponse.warning){
+				console.log("WARN", body.warning); //eslint-ignore-line no-console
+			}
+			return resolve(body.shortLink);
+		});
+	});
 }
 
 const spoilerRegex = />!(.+?)!</gs;
