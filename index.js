@@ -9,6 +9,8 @@ const client = new Discord.Client();
 
 client.on("ready", () => {
 	console.log("Started as "+client.user.tag); //eslint-ignore-line no-console
+	setInterval(updateActivity, 60 * 1000);
+	updateActivity();
 });
 
 function replaceAsync(str, re, callback) { // https://stackoverflow.com/questions/33631041/javascript-async-await-in-replace
@@ -107,7 +109,7 @@ client.on("message", async msg => {
 			return;
 		}
 
-		await msg.delete();
+		msg.delete(250); // Attempt at preventing client glitch where messages don't dissapear
 		await msg.channel.startTyping();
 
 		let spoilInfoNew = true;
@@ -118,14 +120,15 @@ client.on("message", async msg => {
 
 		msg.channel.stopTyping();
 
+		content += "\n​";
+
 		if(content.length > 2000){
 			let delme = await msg.reply("<:failure:508841130503438356> That spoiler is too close to 2000 characters.");
 			delme.delete(10*1000);
 			return;
 		}
-
 		let embed = new RichEmbed({
-			"title": "Spoiler",
+			"title": `​`,
 			"description": content,
 			"color": 7374587,
 			"footer": {
@@ -133,8 +136,8 @@ client.on("message", async msg => {
 			},
 			"author": {
 				"name": msg.member.displayName,
-				"url": msg.author.avatarURL,
-				"icon_url": msg.author.avatarURL
+				"url": msg.author.avatarURL || msg.author.defaultAvatarURL,
+				"icon_url": msg.author.avatarURL || msg.author.defaultAvatarURL
 			}
 		});
 		await msg.channel.send("Spoiler:", {embed:embed});
@@ -147,6 +150,11 @@ client.on("message", async msg => {
 		return await msg.channel.send("Say `about` for info about me.");
 	}
 });
+
+function updateActivity() {
+	let count = client.guilds.size;
+	client.user.setActivity(`spoiling on >! ${count} !< servers`);
+}
 
 client.login(secret.token);
 
