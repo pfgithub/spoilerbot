@@ -20,3 +20,31 @@ Put a spoiler in any message by putting `>! !<` around the spoiler
 [Support Server](https://discord.gg/j7qpZdE)  
 [Source Code](https://github.com/pfgithub/spoilerbot/)  
 [Website](https://pfgithub.github.com/spoilerbot/)
+
+## running yourself
+
+```bash
+# download
+git clone https://github.com/pfgithub/spoilerbot.git
+cd spoilerbot
+```
+---
+
+```bash
+# setup
+yarn install
+```
+Create `secret.json` with
+<pre>
+{
+  "token": "<a href="http://discordapp.com/applications/developers/me">Your Bot Token</a>",
+  "firebasekey": "AIzaSyCK6kq9FxWLYdnlMg9WpspX_9DK-WjObAo
+}
+</pre>
+
+---
+
+```bash
+# run
+node index.js
+```
