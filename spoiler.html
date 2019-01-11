@@ -1,12 +1,17 @@
----
-layout: default
-title: Home
----
-<h1 id="spoilercont"></div>
-<script>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Spoiler</title>
+	</head>
+	<body>
 
-	const urlParams = new URLSearchParams(window.location.search);
-	const spoiler = urlParams.get("s");
 
-	document.getElementById("spoilercont").innerText = spoiler;
-</script>
+	<script>
+
+		const urlParams = new URLSearchParams(window.location.search);
+		const spoiler = urlParams.get("s");
+
+		document.body.innerText = spoiler;
+	</script>
+	</body>
+</html>
