@@ -1,1 +1,14 @@
 theme: jekyll-theme-cayman
+custom_buttons:
+  -
+    title: Invite Me
+    url: https://discordapp.com/oauth2/authorize?client_id=532791925711962114&scope=bot&permissions=9216
+  -
+    title: Support Server
+    url: https://discord.gg/j7qpZdE
+  -
+    title: Source Code
+    url: https://github.com/pfgithub/spoilerbot/
+  -
+    title: Website
+    url: https://pfgithub.github.com/spoilerbot/
