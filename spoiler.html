@@ -2,10 +2,11 @@
 layout: default
 title: Home
 ---
+<h1 id="spoilercont"></div>
 <script>
 
 	const urlParams = new URLSearchParams(window.location.search);
 	const spoiler = urlParams.get("s");
 
-	document.body.innerText = spoiler;
+	document.getElementById("spoilercont").innerText = spoiler;
 </script>
