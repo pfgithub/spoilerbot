@@ -1,11 +1,9 @@
 const Discord = require("discord.js");
 const RichEmbed = Discord.RichEmbed;
-const PastebinAPI = require("pastebin-js");
 const request = require("request");
 
 const secret = require("./secret");
 
-const pastebin = new PastebinAPI(secret.pastebinkey);
 const client = new Discord.Client();
 
 
@@ -63,16 +61,16 @@ function createTextURLFor(str){
 					option: "SHORT"
 				}
 			}},
-		(err, httpResponse, body) => {
-			if(err || body.error) {
-				console.log(err, body);
-				return resolve(longURL);
-			}
-			if(httpResponse.warning){
-				console.log("WARN", body.warning); //eslint-ignore-line no-console
-			}
-			return resolve(body.shortLink);
-		});
+			(err, httpResponse, body) => {
+				if(err || body.error) {
+					console.log(err, body);
+					return resolve(longURL);
+				}
+				if(httpResponse.warning){
+					console.log("WARN", body.warning); //eslint-ignore-line no-console
+				}
+				return resolve(body.shortLink);
+			});
 	});
 }
 
@@ -83,7 +81,32 @@ client.on("message", async msg => {
 
 	let content = msg.content; // pings are not pinged in embeds
 
-	if(content.indexOf(">!") > -1 && content.indexOf("!<") > -1){
+	if(content.indexOf(">!") > -1 && content.indexOf("!<") > -1 && content.match(spoilerRegex)){
+		// Check permissions
+		let guild = msg.guild;
+		if(!guild) {return msg.reply("<:failure:508841130503438356> Spoilers cannot be used in PMs. Invite me to a server (say `about` for more info)");}
+
+		let me = guild.me;
+		let myperms = msg.channel.memberPermissions(me);
+
+		if(!myperms.has("SEND_MESSAGES")){
+			if(guild.id === "264445053596991498" || guild.id === "110373943822540800") {return;} // disables PMs in bot list servers, in case the bot gets triggered too much and needs mute 
+			let delme = await msg.author.send(`<:failure:508841130503438356> Spoilers are not available in #${msg.channel.name} because I do not have permission to send messages there.`);
+			delme.delete(10*1000);
+			return;
+		}
+
+		if(!myperms.has("MANAGE_MESSAGES")){
+			if(guild.me.hasPermission("MANAGE_MESSAGES")){
+				let delme = await msg.reply(`<:failure:508841130503438356> Spoilers are not available in ${msg.channel} because I do not have permission to manage messages.`);
+				delme.delete(10*1000);
+				return;
+			}
+			let delme = await msg.reply("<:failure:508841130503438356> Spoilers are not available in this server because I do not have permission to manage messages.");
+			delme.delete(10*1000);
+			return;
+		}
+
 		await msg.delete();
 		await msg.channel.startTyping();
 
@@ -93,12 +116,20 @@ client.on("message", async msg => {
 			return `[Spoiler${spoilInfoNew ? `${(spoilInfoNew = false) || ""} (Hover/Click)` : ""}](${await createTextURLFor(spoilermessage)} "${clean(spoilermessage)}")`;
 		});
 
+		msg.channel.stopTyping();
+
+		if(content.length > 2000){
+			let delme = await msg.reply("<:failure:508841130503438356> That spoiler is too close to 2000 characters.");
+			delme.delete(10*1000);
+			return;
+		}
+
 		let embed = new RichEmbed({
 			"title": "Spoiler",
 			"description": content,
 			"color": 7374587,
 			"footer": {
-				"text": "The message author can react with ❌ (:x:) to delete this message. | Spoiler Bot"
+				"text": "react ❌ (:x:) to delete | msg me `about` for more info"
 			},
 			"author": {
 				"name": msg.member.displayName,
@@ -106,8 +137,14 @@ client.on("message", async msg => {
 				"icon_url": msg.author.avatarURL
 			}
 		});
-		msg.channel.stopTyping();
 		await msg.channel.send("Spoiler:", {embed:embed});
+		return;
+	}
+	if(!msg.guild){
+		if(content.indexOf("about") > -1){
+			return await msg.channel.send("About:", {embed: {"title":"Spoiler Bot","description":"A discord bot for `>!spoilers!<`.\nUsage: `example message with a >!spoiler!<`","url":"https://pfgithub.github.io/spoilerbot/","color":14207324,"fields":[{"name":"Invite Me to a Server","value":"https://discordapp.com/oauth2/authorize?client_id=532791925711962114&scope=bot&permissions=9216"},{"name":"Support Server","value":"https://discord.gg/j7qpZdE"},{"name":"Source Code","value":"https://github.com/pfgithub/spoilerbot/"},{"name":"Website","value":"https://pfgithub.github.com/spoilerbot/"}]}});
+		}
+		return await msg.channel.send("Say `about` for info about me.");
 	}
 });
 
