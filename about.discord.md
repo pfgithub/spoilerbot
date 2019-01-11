@@ -9,7 +9,7 @@ Put a spoiler in any message by putting `>! !<` around the spoiler.
 **errors**  
 ```diff
 - Spoilers cannot be used in PMs.
-+ Spoilerbot is intended for use in servers, not PMs. [Invite it](https://discordapp.com/oauth2/authorize?client_id=532791925711962114&scope=bot&permissions=9216) to a server.
++ Spoilerbot is intended for use in servers, not PMs. Invite it to a server.
 
 - Spoilers are not available in #channel because I do not have permission to send messages there.
 + Spoilerbot does not have permission to send messages in the channel you tried. Some channels have restrictions on who can send messages there. If the channel does not have custom permissions set, make sure spoilerbot has permission in server settings.
