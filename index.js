@@ -140,14 +140,16 @@ client.on("message", async msg => {
 				"icon_url": msg.author.avatarURL || msg.author.defaultAvatarURL
 			}
 		});
-		await msg.channel.send("Spoiler:", {embed:embed});
+		let reply = await msg.reply("Spoiler:", {embed:embed});
+		//let reaction = await reply.react("❌");
+		//setTimeout(_ => reaction.remove(), 5*1000);
 		return;
 	}
 	if(!msg.guild){
 		if(content.indexOf("about") > -1){
 			return await msg.channel.send("About:", {embed: {"title":"Spoiler Bot","description":"A discord bot for `>!spoilers!<`.\nUsage: `example message with a >!spoiler!<`","url":"https://pfgithub.github.io/spoilerbot/","color":14207324,"fields":[{"name":"Invite Me to a Server","value":"https://discordapp.com/oauth2/authorize?client_id=532791925711962114&scope=bot&permissions=9216"},{"name":"Support Server","value":"https://discord.gg/j7qpZdE"},{"name":"Source Code","value":"https://github.com/pfgithub/spoilerbot/"},{"name":"Website","value":"https://pfgithub.github.com/spoilerbot/"}]}});
 		}
-		return await msg.channel.send("Say `about` for info about me.");
+		return await msg.channel.send("Say `about` for info about me."); // Reply required because it contains the user ID.
 	}
 });
 
@@ -155,6 +157,43 @@ function updateActivity() {
 	let count = client.guilds.size;
 	client.user.setActivity(`spoiling on >! ${count} !< servers`);
 }
+
+function getEmojiKey(emoji) {
+	return (emoji.id) ? `${emoji.name}:${emoji.id}` : emoji.name;
+}
+
+client.on("raw", async event => { // copied from ipbot
+	if (event.t !== "MESSAGE_REACTION_ADD") return;
+
+	const { d: data } = event;
+	const user = client.users.get(data.user_id);
+	if(!user) return;
+	const channel = client.channels.get(data.channel_id);
+	if(!channel) return;
+	let message;
+	try{
+	message = await channel.fetchMessage(data.message_id);
+	}catch(e){return;}
+	if(!message) return;
+	if(!message.guild) return;
+	const emojiKey = getEmojiKey(data.emoji);
+	const reaction = message.reactions.get(emojiKey);
+
+	client.emit("messageReactionAddCustom", reaction, user, message);
+});
+
+function userOwnsMessage(user, message){ // true for any message authored by the bot @tting the reactor
+	if(message.author.id !== client.user.id) return false;
+	if(message.content.indexOf(user.id) === -1) return false;
+	return true;
+}
+
+client.on("messageReactionAddCustom", async (reaction, user, message) => {
+	if(user.bot) return;
+	if(userOwnsMessage(user, message) && reaction.emoji.toString() === "❌") {
+		message.delete();
+	}
+});
 
 client.login(secret.token);
 
