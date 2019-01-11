@@ -1,13 +1,12 @@
-# >!spoilerbot!<
+**>!spoilerbot!<**  
 makes >!spoilers!< for text you don't want >!other people to see!<
 
 > makes [Spoiler (hover/click)](https://spoilerbot.page.link/81nF "spoilers") for text you don't want [Spoiler](https://spoilerbot.page.link/hJJ9 "other people to see")
 
-## usage
+**usage**  
 Put a spoiler in any message by putting `>! !<` around the spoiler.
 
-## errors
-
+**errors**  
 ```diff
 - Spoilers cannot be used in PMs.
 + Spoilerbot is intended for use in servers, not PMs. [Invite it](https://discordapp.com/oauth2/authorize?client_id=532791925711962114&scope=bot&permissions=9216) to a server.
@@ -27,8 +26,7 @@ Put a spoiler in any message by putting `>! !<` around the spoiler.
 
 Join the [support server](https://discord.gg/j7qpZdE) or submit a bug report on [github](https://github.com/pfgithub/spoilerbot/) if there are any problems you can't find a solution to.
 
-## about
-
+**about**  
 [Invite Me](https://discordapp.com/oauth2/authorize?client_id=532791925711962114&scope=bot&permissions=9216)  
 [Support Server](https://discord.gg/j7qpZdE)  
 [Source Code](https://github.com/pfgithub/spoilerbot/)  
