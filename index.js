@@ -5,7 +5,9 @@ const request = require("request");
 const secret = require("./secret");
 
 const client = new Discord.Client();
+const fs = require("fs");
 
+let aboutMessage = fs.readFileSync("./about.discord.md", "utf8");
 
 client.on("ready", () => {
 	console.log("Started as "+client.user.tag); //eslint-ignore-line no-console
@@ -147,7 +149,7 @@ client.on("message", async msg => {
 	}
 	if(!msg.guild){
 		if(content.indexOf("about") > -1){
-			return await msg.channel.send("About:", {embed: {"title":"Spoiler Bot","description":"A discord bot for `>!spoilers!<`.\nUsage: `example message with a >!spoiler!<`","url":"https://pfgithub.github.io/spoilerbot/","color":14207324,"fields":[{"name":"Invite Me to a Server","value":"https://discordapp.com/oauth2/authorize?client_id=532791925711962114&scope=bot&permissions=9216"},{"name":"Support Server","value":"https://discord.gg/j7qpZdE"},{"name":"Source Code","value":"https://github.com/pfgithub/spoilerbot/"},{"name":"Website","value":"https://pfgithub.github.com/spoilerbot/"}]}});
+			return await msg.channel.send("About:", {embed: {"title":"Spoiler Bot","description":aboutMessage,"url":"https://pfgithub.github.io/spoilerbot/","color":14207324}});
 		}
 		return await msg.channel.send("Say `about` for info about me."); // Reply required because it contains the user ID.
 	}
