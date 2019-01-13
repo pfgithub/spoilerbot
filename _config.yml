@@ -1,6 +1,9 @@
 theme: jekyll-theme-cayman
 custom_buttons:
   -
+    title: discordbots.org
+    url: https://discordbots.org/bot/532791925711962114
+  -
     title: Invite Me
     url: https://discordapp.com/oauth2/authorize?client_id=532791925711962114&scope=bot&permissions=9216
   -
