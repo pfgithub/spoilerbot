@@ -1,17 +1,17 @@
 theme: jekyll-theme-cayman
 custom_buttons:
   -
-    title: discordbots.org
-    url: https://discordbots.org/bot/532791925711962114
-  -
     title: Invite Me
-    url: https://discordapp.com/oauth2/authorize?client_id=532791925711962114&scope=bot&permissions=9216
+    url: https://discord.com/oauth2/authorize?client_id=433078185555656705&permissions=11264&scope=bot+applications.commands
+  -
+    title: top.gg
+    url: https://top.gg/bot/433078185555656705
   -
     title: Support Server
     url: https://discord.gg/j7qpZdE
   -
     title: Source Code
-    url: https://github.com/pfgithub/spoilerbot/
+    url: https://github.com/pfgithub/interpunctbot/
   -
     title: Website
-    url: https://pfgithub.github.com/spoilerbot/
+    url: https://interpunct.info/
