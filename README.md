@@ -12,8 +12,8 @@ Add the bot:
 
 ## links
 
-[Invite to your server](https://discord.com/oauth2/authorize?client_id=433078185555656705&permissions=11264&scope=bot+applications.commands)
-[top.gg](https://top.gg/bot/433078185555656705)
+[Invite to your server](https://discord.com/oauth2/authorize?client_id=433078185555656705&permissions=11264&scope=bot+applications.commands)  
+[top.gg](https://top.gg/bot/433078185555656705)  
 [discord.bots.gg](https://discord.bots.gg/bots/433078185555656705)  
 [Support Server](https://discord.gg/j7qpZdE)  
 [Source Code](https://github.com/pfgithub/interpunctbot/)  
