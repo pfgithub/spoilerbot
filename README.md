@@ -1,5 +1,7 @@
 # inter·punct >!spoilerbot!<
 
+Image spoilers for mobile discord users.
+
 [Invite to your server](https://discord.com/oauth2/authorize?client_id=433078185555656705&permissions=11264&scope=bot+applications.commands)
 
 uploads spoiler images to discord for mobile users
@@ -20,9 +22,12 @@ Add the bot:
 [Website](https://interpunct.info/)
 
 ## usage
+
 Send `ip!spoiler` and upload the image
 
 ![usage](https://user-images.githubusercontent.com/6010774/123184538-bbe4cd00-d448-11eb-926d-b99311931b7d.png)
+
+This will reupload the image and mark it as a spoiler, then delete your original image.
 
 ## errors
 
