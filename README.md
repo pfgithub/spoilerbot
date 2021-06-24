@@ -1,72 +1,31 @@
-# >!spoilerbot!<
-makes >!spoilers!< for text you don't want >!other people to see!<
+# inter·punct >!spoilerbot!<
 
-> makes [Spoiler (hover/click)](https://spoilerbot.page.link/81nF "spoilers") for text you don't want [Spoiler](https://spoilerbot.page.link/hJJ9 "other people to see")
+[Invite to your server](https://discord.com/oauth2/authorize?client_id=433078185555656705&permissions=11264&scope=bot+applications.commands)
+
+uploads spoiler images to discord for mobile users
+
+`ip!spoiler` and upload the image
+
+![demo](https://user-images.githubusercontent.com/6010774/123184226-1af61200-d448-11eb-83aa-1d314d1ae176.png)
+
+Add the bot: 
 
 ## links
 
-[discordbots.org](https://discordbots.org/bot/532791925711962114)  
-[Invite Me](https://discordapp.com/oauth2/authorize?client_id=532791925711962114&scope=bot&permissions=9216)  
+[Invite to your server](https://discord.com/oauth2/authorize?client_id=433078185555656705&permissions=11264&scope=bot+applications.commands)
+[top.gg](https://top.gg/bot/433078185555656705)
+[discord.bots.gg](https://discord.bots.gg/bots/433078185555656705)  
 [Support Server](https://discord.gg/j7qpZdE)  
-[Source Code](https://github.com/pfgithub/spoilerbot/)  
-[Website](https://pfgithub.github.com/spoilerbot/)
+[Source Code](https://github.com/pfgithub/interpunctbot/)  
+[Website](https://interpunct.info/)
 
 ## usage
-Put a spoiler in any message by putting `>! !<` around the spoiler. You can have as many spoilers as you want in a message.
+Send `ip!spoiler` and upload the image
+
+![usage](https://user-images.githubusercontent.com/6010774/123184538-bbe4cd00-d448-11eb-926d-b99311931b7d.png)
 
 ## errors
 
-**Spoilers cannot be used in PMs.**  
-Spoilerbot is intended for use in servers, not PMs. [Invite it](https://discordapp.com/oauth2/authorize?client_id=532791925711962114&scope=bot&permissions=9216) to a server.
+The bot needs permission to Manage Messages in order to delete the spoiler message.
 
----
-
-**Spoilers are not available in #channel because I do not have permission to send messages there.**  
-Spoilerbot does not have permission to send messages in the channel you tried. Some channels have restrictions on who can send messages there. If the channel does not have custom permissions set, make sure spoilerbot has permission in server settings.
-
----
-
-**Spoilers are not available in this server because I do not have permission to manage messages.**  
-Spoilerbot requires permission to manage messages so it can delete the original message with the unmasked spoiler. Give it permission in server settings.
-
----
-
-**Spoilers are not available in #channel because I do not have permission to manage messages.**  
-That channel has channel permissions set such that spoilerbot is not allowed to send messages there. Edit channel permissions with the Edit Channel button.
-
----
-
-**That spoiler is too close to 2000 characters.**  
-Converting messages into spoilers adds extra characters, meaning that even if your message was <2000 characters it may go over the limit after being masked. Try sending your message in multiple parts or shortening it.
-
----
-
-Join the [support server](https://discord.gg/j7qpZdE) or submit a bug report on [github](https://github.com/pfgithub/spoilerbot/) if there are any problems you can't find a solution to.
-
-## running yourself
-
-```bash
-# download
-git clone https://github.com/pfgithub/spoilerbot.git
-cd spoilerbot
-```
----
-
-```bash
-# setup
-yarn install
-```
-Create `secret.json` with
-<pre>
-{
-  "token": "<a href="http://discordapp.com/applications/developers/me">Your Bot Token</a>",
-  "firebasekey": "AIzaSyCK6kq9FxWLYdnlMg9WpspX_9DK-WjObAo
-}
-</pre>
-
----
-
-```bash
-# run
-node index.js
-```
+Join the [support server](https://discord.gg/j7qpZdE) or submit a bug report on [github](https://github.com/pfgithub/interpunctbot/) if there are any problems you can't find a solution to.
